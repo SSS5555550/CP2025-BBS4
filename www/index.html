@@ -55,11 +55,19 @@ function updateCharacterCount(inputId, counterId, maxLength) {
     const input = $(`#${inputId}`);
     const counter = $(`#${counterId}`);
 
+    //初期表示（１３回目改良）
+    const initialLength = input.val().length;
+    //すでに入っている文字数の取得
+    counter.text(`残り ${maxLength - initialLength} 文字`);
+    //残り何文字追加できるかの計算
+
     input.on('input', () => {
         const length = input.val().length;
-        counter.text(`${length}/${maxLength}`);
+        const remaining = maxLength - length;
 
-        if (length > maxLength) {
+        counter.text(`残り ${remaining} 文字`);
+
+        if (remaining<0) {//もし残りのみ文字が0より小さくなったら
             counter.addClass('error');
         } else {
             counter.removeClass('error');
