@@ -16,6 +16,21 @@
     <script src="www/config.js"></script>
 
     <script>
+//13回目の改良
+// 背景色をランダムに変更
+function changeBackgroundColor() {//changeBackgroundColor関数を設定した
+
+//下で色をランダムにする
+    const randomColor = `rgb(
+        ${Math.floor(Math.random() * 256)},
+        ${Math.floor(Math.random() * 256)},
+        ${Math.floor(Math.random() * 256)}
+    )`;
+
+    $('body').css('background-color', randomColor);
+}
+
+
 let postsRef;
 let postsListener = null;
 // 現在の編集対象のID
@@ -465,6 +480,12 @@ function updateUI(user) {
 }
 
 $(function() {
+
+//13回目の改良
+//このボタンがクリックされたらという意味
+$('#bgChangeButton').on('click', changeBackgroundColor);
+
+
     // Firebaseの初期化
     try {
         firebase.initializeApp(firebaseConfig);
@@ -526,6 +547,14 @@ window.addEventListener('unload', () => {
 <body>
     <div class="container">
         <h1>掲示板アプリ</h1>
+
+        <div class="button-group" style="justify-content: center; margin-bottom: 20px;">
+    <button id="bgChangeButton" class="btn-secondary">
+        背景色をランダムに変更
+    </button>
+</div>
+
+
 
         <!-- メッセージ表示エリア -->
         <div id="messageArea"></div>
